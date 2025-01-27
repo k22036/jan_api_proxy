@@ -30,8 +30,8 @@ func (controller *ProductController) Add(c Context) {
 	}
 
 	ctx := context.Background()
-	err = controller.ProductInteractor.Add(ctx, product)
-	if err != nil {
+	err1 := controller.ProductInteractor.Add(ctx, product)
+	if err1 != nil {
 		c.JSON(500, NewError(err))
 		return
 	}
