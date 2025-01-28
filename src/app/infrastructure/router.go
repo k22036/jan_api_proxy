@@ -17,9 +17,11 @@ func init() {
 	yahooShoppingHandler := NewYahooShoppingHandler()
 	productController := controllers.NewProductController(redisHandler, geminiHandler, yahooShoppingHandler)
 
-	router.POST("/product", func(c *gin.Context) { productController.Add(c) })
-	router.GET("/product/:jan", func(c *gin.Context) { productController.Get(c) })
-	router.GET("/products", func(c *gin.Context) { productController.GetAll(c) })
-	router.DELETE("/product/:jan", func(c *gin.Context) { productController.Delete(c) })
+	api_v1 := router.Group("/api/v1")
+	api_v1.POST("/product", func(c *gin.Context) { productController.Add(c) })
+	api_v1.GET("/product/:jan", func(c *gin.Context) { productController.Get(c) })
+	api_v1.GET("/products", func(c *gin.Context) { productController.GetAll(c) })
+	api_v1.DELETE("/product/:jan", func(c *gin.Context) { productController.Delete(c) })
+
 	Router = router
 }
