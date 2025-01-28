@@ -25,6 +25,20 @@
 - Gemini API
 - Clean Architecture
 
+## routes
+
+- GET `localhost:8080/api/v1/product/:jan_code`
+  - JANコードから商品名を取得する
+  - キャッシュがあればキャッシュを返す
+  - キャッシュがなければAPIを叩いて商品名を取得し，キャッシュに保存して返す
+- GET `localhost:8080/api/v1/products`
+    - キャッシュに保存されている商品名を全て取得する
+- DELETE `localhost:8080/api/v1/product/:jan_code`
+    - キャッシュに保存されている商品名を削除する
+- POST `localhost:8080/api/v1/product`
+    - input: `{"jan_code": "1234567890123", "product_name": "product_name"}`
+    - キャッシュに商品名を保存する
+
 ## reference
 
 - [Clean ArchitectureでAPI Serverを構築してみる](https://qiita.com/hirotakan/items/698c1f5773a3cca6193e)
