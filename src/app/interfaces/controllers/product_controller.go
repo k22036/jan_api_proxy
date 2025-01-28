@@ -70,3 +70,14 @@ func (controller *ProductController) GetAll(c Context) {
 	}
 	c.JSON(200, products)
 }
+
+func (controller *ProductController) Delete(c Context) {
+	jan := c.Param("jan")
+	ctx := context.Background()
+	err := controller.ProductInteractor.Delete(ctx, jan)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(204, nil)
+}

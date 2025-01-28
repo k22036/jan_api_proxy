@@ -10,4 +10,5 @@ type ProductRepository interface {
 	Get(ctx context.Context, jan string) (domain.Product, error)
 	MGet(ctx context.Context, keys ...string) ([]string, error)
 	AllKeys(ctx context.Context) ([]string, error)
+	Delete(ctx context.Context, key string) error
 }

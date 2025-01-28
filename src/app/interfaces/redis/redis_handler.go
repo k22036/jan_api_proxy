@@ -7,4 +7,5 @@ type RedisHandler interface {
 	Get(ctx context.Context, key string) (string, error)
 	MGet(ctx context.Context, keys ...string) ([]string, error)
 	AllKeys(ctx context.Context) ([]string, error)
+	Delete(ctx context.Context, key string) error
 }

@@ -33,3 +33,7 @@ func (repo *ProductRepository) MGet(ctx context.Context, keys ...string) ([]stri
 func (repo *ProductRepository) AllKeys(ctx context.Context) ([]string, error) {
 	return repo.RedisHandler.AllKeys(ctx)
 }
+
+func (repo *ProductRepository) Delete(ctx context.Context, key string) error {
+	return repo.RedisHandler.Delete(ctx, key)
+}

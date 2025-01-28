@@ -14,6 +14,7 @@ type productInteractor interface {
 	Add(ctx context.Context, product domain.Product) error
 	Get(ctx context.Context, jan string) (domain.Product, error)
 	GetAll(ctx context.Context) ([]domain.Product, error)
+	Delete(ctx context.Context, jan string) error
 }
 
 type ProductInteractor struct {
@@ -83,4 +84,8 @@ func (interactor *ProductInteractor) GetAll(ctx context.Context) ([]domain.Produ
 	}
 
 	return products, nil
+}
+
+func (interactor *ProductInteractor) Delete(ctx context.Context, jan string) error {
+	return interactor.ProductRepository.Delete(ctx, jan)
 }

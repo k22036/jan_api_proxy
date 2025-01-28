@@ -58,3 +58,11 @@ func (r *RedisHandler) AllKeys(ctx context.Context) ([]string, error) {
 	}
 	return keys, nil
 }
+
+func (r *RedisHandler) Delete(ctx context.Context, key string) error {
+	err := r.client.Del(ctx, key).Err()
+	if err != nil {
+		return fmt.Errorf("failed to delete key: %w", err)
+	}
+	return nil
+}
