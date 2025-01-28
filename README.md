@@ -18,6 +18,7 @@
 ## Tech Stack
 
 - Go
+- Gin
 - Redis
 - Docker
 - Docker Compose
