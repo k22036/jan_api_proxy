@@ -13,6 +13,7 @@ import (
 type productInteractor interface {
 	Add(ctx context.Context, product domain.Product) error
 	Get(ctx context.Context, jan string) (domain.Product, error)
+	GetAll(ctx context.Context) ([]domain.Product, error)
 }
 
 type ProductInteractor struct {
@@ -63,4 +64,23 @@ func (interactor *ProductInteractor) Get(ctx context.Context, jan string) (domai
 	}
 
 	return domain.Product{JAN: jan, Name: name}, nil
+}
+
+func (interactor *ProductInteractor) GetAll(ctx context.Context) ([]domain.Product, error) {
+	keys, err := interactor.ProductRepository.AllKeys(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	names, err := interactor.ProductRepository.MGet(ctx, keys...)
+	if err != nil {
+		return nil, err
+	}
+
+	var products []domain.Product
+	for i, key := range keys {
+		products = append(products, domain.Product{JAN: key, Name: names[i]})
+	}
+
+	return products, nil
 }

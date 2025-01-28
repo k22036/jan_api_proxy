@@ -25,3 +25,11 @@ func (repo *ProductRepository) Get(ctx context.Context, jan string) (domain.Prod
 	}
 	return product, nil
 }
+
+func (repo *ProductRepository) MGet(ctx context.Context, keys ...string) ([]string, error) {
+	return repo.RedisHandler.MGet(ctx, keys...)
+}
+
+func (repo *ProductRepository) AllKeys(ctx context.Context) ([]string, error) {
+	return repo.RedisHandler.AllKeys(ctx)
+}

@@ -17,7 +17,8 @@ func init() {
 	yahooShoppingHandler := NewYahooShoppingHandler()
 	productController := controllers.NewProductController(redisHandler, geminiHandler, yahooShoppingHandler)
 
-	router.POST("/products", func(c *gin.Context) { productController.Add(c) })
-	router.GET("/products/:jan", func(c *gin.Context) { productController.Get(c) })
+	router.POST("/product", func(c *gin.Context) { productController.Add(c) })
+	router.GET("/product/:jan", func(c *gin.Context) { productController.Get(c) })
+	router.GET("/products", func(c *gin.Context) { productController.GetAll(c) })
 	Router = router
 }

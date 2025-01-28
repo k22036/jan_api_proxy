@@ -60,3 +60,13 @@ func (controller *ProductController) Get(c Context) {
 	}
 	c.JSON(200, product)
 }
+
+func (controller *ProductController) GetAll(c Context) {
+	ctx := context.Background()
+	products, err := controller.ProductInteractor.GetAll(ctx)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(200, products)
+}
