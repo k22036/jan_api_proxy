@@ -2,7 +2,9 @@ package controllers
 
 import (
 	"app/domain"
+	"app/interfaces/gemini"
 	"app/interfaces/redis"
+	"app/interfaces/yahooshopping"
 	"app/usecase"
 	"context"
 )
@@ -11,11 +13,21 @@ type ProductController struct {
 	ProductInteractor usecase.ProductInteractor
 }
 
-func NewProductController(redisHandler redis.RedisHandler) *ProductController {
+func NewProductController(
+	redisHandler redis.RedisHandler,
+	geminiHandler gemini.GeminiHandler,
+	yahooShoppingHandler yahooshopping.YahooShoppingHandler,
+) *ProductController {
 	return &ProductController{
 		ProductInteractor: usecase.ProductInteractor{
 			ProductRepository: &redis.ProductRepository{
 				RedisHandler: redisHandler,
+			},
+			GeminiGateway: gemini.GeminiGateway{
+				GeminiHandler: geminiHandler,
+			},
+			YahooShoppingGateway: yahooshopping.YahooShoppingGateway{
+				YahooShoppingHandler: yahooShoppingHandler,
 			},
 		},
 	}

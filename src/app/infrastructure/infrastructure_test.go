@@ -40,7 +40,7 @@ func TestRequest(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		input := "I'm a software engineer."
 		ctx := context.Background()
-		h := infrastructure.NewGeminiHandler(ctx)
+		h := infrastructure.NewGeminiHandler()
 		res, err := h.Request(ctx, input)
 		if err != nil {
 			t.Error(err)
